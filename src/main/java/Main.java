@@ -13,8 +13,6 @@ public class Main {
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
 
-        em.getTransaction().begin();
-
         Meal meal = new Meal("meal 1");
         Ingredient ing1 = new Ingredient("ing 1");
         Ingredient ing2 = new Ingredient("ing 2");
@@ -28,8 +26,6 @@ public class Main {
         em.persist(ing1);
         em.persist(ing2);
         em.persist(ing3);
-
-        em.getTransaction().commit();
 
         List<Meal> meals = em.createQuery("SELECT m FROM Meal m", Meal.class).getResultList();
 
