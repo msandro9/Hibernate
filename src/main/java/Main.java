@@ -37,7 +37,7 @@ public class Main {
             System.out.println(m.getId() + " " + m.getName());
 
             for (Ingredient i : m.getIngredients()) {
-                System.out.println("---" + i.getName());
+                System.out.println("---" + " " + i.getId() + " " + i.getName());
             }
         }
 
