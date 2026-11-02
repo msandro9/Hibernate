@@ -1,6 +1,4 @@
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 import model.Ingredient;
 import model.Meal;
 
@@ -12,6 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
 
         Meal meal = new Meal("meal 1");
         Ingredient ing1 = new Ingredient("ing 1");
@@ -22,10 +21,11 @@ public class Main {
         meal.addIngredient(ing2);
         meal.addIngredient(ing3);
 
+        tx.begin();
+
         em.persist(meal);
-        em.persist(ing1);
-        em.persist(ing2);
-        em.persist(ing3);
+
+        tx.commit();
 
         List<Meal> meals = em.createQuery("SELECT m FROM Meal m", Meal.class).getResultList();
 
